@@ -1,16 +1,20 @@
 package com.paint.bindingtoolbarfragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.paint.bindingtoolbarfragment.databinding.FragmentBlankBinding
+
 
 class BlankFragment : Fragment() {
 
     private var _binding: FragmentBlankBinding? = null
     private val binding get() = _binding!!
+
+    private var isVIewVisible = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,10 +30,25 @@ class BlankFragment : Fragment() {
         _binding = null
     }
 
-    private fun initVIew(){
+    private fun initVIew() {
         binding.titleeee.text = "dsdsd"
         binding.layoutInFragment.buttonInLayout.setOnClickListener {
-
+            if (isVIewVisible) {
+                showView()
+            } else {
+                hideView()
+            }
+            isVIewVisible = !isVIewVisible
         }
+    }
+
+    private fun showView() {
+        Log.d("WW", "SHOW")
+        binding.titleeee.showWithAnimation()
+    }
+
+    private fun hideView() {
+        Log.d("WW", "HIDE")
+        binding.titleeee.hideWithAnimation()
     }
 }
